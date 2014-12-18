@@ -200,10 +200,10 @@
 							$templateCache.put(options.template || options.templateUrl, template);
 
 							if (options.showClose) {
-								template += '<div class="ngdialog-close"></div>';
+								template += '<button aria-label="close dialog" class="ngdialog-close"></button>';
 							}
 
-							self.$result = $dialog = $el('<div id="ngdialog' + globalID + '" class="ngdialog"></div>');
+							self.$result = $dialog = $el('<div id="ngdialog' + globalID + '" class="ngdialog" role="dialog" tabindex="0"></div>');
 							$dialog.html((options.overlay ?
 								'<div class="ngdialog-overlay"></div><div class="ngdialog-content">' + template + '</div>' :
 								'<div class="ngdialog-content">' + template + '</div>'));
@@ -265,10 +265,14 @@
 								var widthDiffs = $window.innerWidth - $body.prop('clientWidth');
 								$body.addClass('ngdialog-open');
 								var scrollBarWidth = widthDiffs - ($window.innerWidth - $body.prop('clientWidth'));
+
 								if (scrollBarWidth > 0) {
 									privateMethods.setBodyPadding(scrollBarWidth);
 								}
+
 								$dialogParent.append($dialog);
+
+								$dialog.get(0).focus();
 
 								if (options.name) {
 									$rootScope.$broadcast('ngDialog.opened', {dialog: $dialog, name: options.name});
