@@ -203,10 +203,10 @@
 								template += '<button aria-label="close dialog" class="ngdialog-close"></button>';
 							}
 
-							self.$result = $dialog = $el('<div id="ngdialog' + globalID + '" class="ngdialog" role="dialog" tabindex="0"></div>');
+							self.$result = $dialog = $el('<div id="ngdialog' + globalID + '" class="ngdialog"></div>');
 							$dialog.html((options.overlay ?
-								'<div class="ngdialog-overlay"></div><div class="ngdialog-content">' + template + '</div>' :
-								'<div class="ngdialog-content">' + template + '</div>'));
+								'<div class="ngdialog-overlay"></div><div class="ngdialog-content" role="dialog" tabindex="-1" aria-labelled-by="ng-dialog-title">' + template + '</div>' :
+								'<div class="ngdialog-content" role="dialog" tabindex="-1" aria-labelled-by="ng-dialog-title">' + template + '</div>'));
 
 							if (options.data && angular.isString(options.data)) {
 								var firstLetter = options.data.replace(/^\s*/, '')[0];
